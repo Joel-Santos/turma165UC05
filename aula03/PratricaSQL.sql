@@ -106,7 +106,8 @@ order by f.nome;
 
 --13) Crie uma consulta que retorne todos os filmes cujo nome 
 -- contenha a palavra "Dark".
-
+select * from filme 
+where LOWER(nome) like '%dark%';
 
 
 
