@@ -58,25 +58,71 @@ select nome from artista order by nome desc;
 -- 8) Liste as músicas cujo título contenha a palavra “show”.
 select titulo from musica where LOWER(titulo) like '%show%';
 
+-- 9) Liste todos os gêneros cujo nome tenha mais de 5 caracteres
+select nome from genero where length(nome) > 5;
+
+-- 10) Liste os títulos das músicas renomeando a coluna como nome_musica.
+select titulo as nome_musica from musica;
+
+-- 11) Liste os gêneros renomeando a tabela como g usando alias.
+select g.nome from genero g; 
+
+-- 12) Insira um gênero chamado “Rock”.
+insert into genero(nome) values ('Rock');
+
+-- 13) Insira um artista chamado “Queen”.
+insert into artista(nome) values ('Queen');
+
+-- 14) Insira três gêneros diferentes em um único comando.
+insert into genero(nome) values ('Forró'), ('Jazz'), ('Lambada');
+
+-- 15) Insira uma música chamada “Bohemian Rhapsody” 
+--  com artista e gênero correspondente.
+
+insert into musica(titulo, ano, fk_artista, fk_genero)
+values('Bohemian Rhapsody', 1975, 4, 4);
+
+-- 16) Atualize o nome do gênero com ID = 3 para “Funk Carioca”.
+update genero set nome = 'Funk Carioca' 
+where id = 3;
+
+-- 17) Atualize o nome da música “Believer” para “Believer (Remastered)”.
+update musica set titulo = 'Believer (Remastered)' where titulo = 'Believer';
+
+-- 18) Atualize o ano da música “Blinding Lights” para 2020.
+update musica set ano = 2020 where titulo = 'Blinding Lights';
+
+-- 19) Altere o artista com ID = 3 para “Anitta (BR)” 
+-- e o ano de estreia da música correspondente para 2014.
+update  artista set nome = 'Anitta (BR)' where id = 3;
+update musica set ano = 2014 where fk_artista = 3;
+
+-- 20) Aumente o ano de TODAS as músicas em +1 usando UPDATE.
+update musica set ano = ano + 1;
+
+-- 21) Adicione à tabela ARTISTA o campo: nacionalidade VARCHAR(40)
+alter table  artista
+add column nacionalidade VARCHAR(40);
+
+-- 22) Renomear o campo titulo da tabela MUSICA para nome
+alter table musica 
+rename column titulo to nome;
+
+-- 23) Adicionar o campo duracao_segundos
+-- na tabela MUSICA com valor default 0 e não nulo (int).
+alter table musica 
+add column duracao_segundos int not null default 0;
+
+-- 24) Adicionar CHECK garantindo ano > 1900
+alter table musica 
+add constraint chk_ano 
+CHECK(ano > 1900);
 
 
+-- 25) Criar uma música e verificar se o check está sendo aplicado.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+insert into musica(nome, ano, fk_artista, fk_genero)
+values('Pistoleiro do Forró', 1890, 4, 4);
 
 
 
