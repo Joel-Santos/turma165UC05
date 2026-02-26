@@ -97,17 +97,76 @@ values
 insert into categorias(nome)
 values('Nacional');
 
+-- 9. ATUALIZE a tabela produtos, aumentando o preço do produto 
+-- cujo id é 4, para R$ 298.00;
+update produtos set preco = 298
+where id = 4;
+
+-- 10. RECUPERE da tabela produtos, todos os produtos do 
+-- Fornecedor localizado no RS;
+select * from produtos 
+where fk_fornecedor = 1 or fk_fornecedor = 3;
+
+-- 11. RECUPERE da tabela produtos, todos os produtos do Fornecedor 
+-- localizado em SP;
+select * from produtos 
+where fk_fornecedor = 4;
+
+-- 12. RECUPERE da tabela produtos e fornecedores o nome do 
+-- produto mais caro e o nome do fornecedor deste produto;
+select produtos.nome as produto, fornecedores.nome as fornecedor 
+from produtos, fornecedores 
+where produtos.fk_fornecedor  = fornecedores.id
+order by produtos.preco desc limit 1;
+
+-- 13. ATUALIZE a tabela fornecedores, alterando a cidade 
+-- para Parnamirim, o estado para RN e a Rua
+-- para Abel Cabral, do Fornecedor cujo nome é Elon Electro;
+
+update fornecedores set
+cidade = 'Parnamirim', estado = 'RN', rua = 'Abel Cabral'
+where nome = 'Elon Electro';
 
 
+-- 14. ATUALIZE a tabela produtos, alterando o 
+-- preço dos produtos em 10% de aumento, cujo fornecedor seja Sansul SA.
+
+update produtos set preco = preco * 1.10 where fk_fornecedor = 2;
 
 
+-- 15. ATUALIZE a tabela produtos, alterando o preço dos produtos 
+-- em 10% de diminuição, cujo fornecedor seja Mike electro 
+-- e a categoria seja Supremo.
+update produtos set preco = preco * 0.90 
+where fk_fornecedor = 5 and fk_categoria = 5;
 
+-- 16. RECUPERE da tabela produtos, todos os produtos que tenham 
+-- o preço entre 8 e 2.000, ordenados a partir do maior preço.
 
+select * from produtos 
+where preco > 8 and preco < 2000
+order by preco desc;
 
+-- 17. RECUPERE da tabela produtos, todos os produtos que 
+-- tenham o preço maior que 2.000,ordenados a partir do menor preço.
+select * from produtos 
+where preco > 2000
+order by preco asc;
 
+-- 18. RECUPERE da tabela fornecedor, o nome de todos os fornecedores 
+-- que iniciam com a letra A.
+select nome from fornecedores 
+where UPPER(nome) like 'A%';
 
+--19. RECUPERE da tabela fornecedor, o nome de todos 
+ -- os fornecedores que contenham a letra S.
+select nome from fornecedores  
+where UPPER(nome) like '%S%';
 
-
+-- 20. ATUALIZE a tabela produtos, aumentando em 15% a 
+-- quantidade de produtos que tenham o preço inferior a 300.
+update produtos set quantidade = quantidade * 1.15
+where preco < 300;
 
 
 
