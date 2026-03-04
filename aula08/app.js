@@ -14,7 +14,7 @@ app.get("/", (req, res)=>{
 });
 
 app.get("/teste", async (req, res)=>{
-    const resultado = await  db.query("SELECT * from alunos");
+    const resultado = await  db.query("DELETE from alunos WHERE ID = 21");
     res.json({msg: resultado});
 })
 
